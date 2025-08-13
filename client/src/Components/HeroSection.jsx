@@ -13,9 +13,9 @@ const HeroSection = () => {
 
   const backgroundImages=[
     "/bg-12.jpg",
-    "/bg-18.png",
-    "/bg-3.jpg",
-    "/bg-14.jpg",
+    // "/bg-18.png",
+    // "/bg-3.jpg",
+    // "/bg-14.jpg",
 
    ];
 
