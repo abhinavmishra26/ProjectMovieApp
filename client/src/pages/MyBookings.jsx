@@ -4,6 +4,7 @@ import BlurCircle from '../Components/BlurCircle';
 import timeformate from '../lib/timeFormate';
 import { dateFormate } from '../lib/dateFormate';
 import { useAppContext } from '../context/AppProvider';
+import { Link } from 'react-router-dom';
 
 
 const MyBookings = () => {
@@ -51,7 +52,7 @@ const MyBookings = () => {
               <div className='flex items-center lg:mb-8 '>
               <h1 className='text-xl mr-4 font-bold'>{currency}{book.amount}</h1>
               {
-                !book.isPaid && <button className='w-18 h-8 bg-primary rounded-2xl text-sm cursor-pointer  '>Pay now</button>
+                !book.isPaid && <Link to={book.paymentLink} className='w-16 h-8 bg-primary rounded-2xl text-xs cursor-pointer flex items-center px-2 '>Pay now</Link>
               }
               </div>
               <p className='mb-1 text-gray-400 text-sm'>Total Tickets: <span>{book.bookedSeats.length}</span></p>

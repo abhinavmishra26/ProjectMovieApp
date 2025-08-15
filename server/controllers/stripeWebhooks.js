@@ -26,7 +26,7 @@ export const stripeWebhooks=async (request,response)=>{
                 const {bookingId}=session.metadata;
                 await Booking.findByIdAndUpdate(bookingId,{
                     isPaid:true,
-                    paymenLink:""
+                    paymentLink:""
                 })
 
                 break;
