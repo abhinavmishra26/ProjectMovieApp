@@ -2,6 +2,7 @@ import Booking from "../model/Booking.js";
 import Show from "../model/Show.js"
 import stripe from "stripe";
 
+
 export const checkSeatsAvailability=async(showId,selectedSeats)=>{
     try{
         const showData=await Show.findById(showId);
@@ -59,6 +60,7 @@ export const createBooking=async(req,res)=>{
         },
         quantity:1
       }]
+      
 
       const session=await  stripeInstance.checkout.sessions.create({
         success_url:`${origin}/loading/my-bookings`,
@@ -72,7 +74,7 @@ export const createBooking=async(req,res)=>{
       })
 
       booking.paymentLink=session.url
-      await booking.save()
+      await booking.save();
       res.json({success:true , url:session.url})
     }
     catch(error){
@@ -80,6 +82,7 @@ export const createBooking=async(req,res)=>{
         res.json({success:false ,message:error.message})
     }
 }
+
 
 
 export const getOccupiedSeats=async(req,res)=>{

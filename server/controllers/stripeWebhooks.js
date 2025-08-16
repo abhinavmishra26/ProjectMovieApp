@@ -10,6 +10,7 @@ export const stripeWebhooks=async (request,response)=>{
 
     try{
         event=stripeInstance.webhooks.constructEvent(request.body,sig,process.env.STRIPE_WEBHOOKS_SECRET_KEY)
+        console.log("keiiiiipi")
     }
     catch(error){
         return response.status(400).send(`webhook Error:${error.message}`);
@@ -18,12 +19,14 @@ export const stripeWebhooks=async (request,response)=>{
     try{
         switch (event.type) {
             case "payment_intent.succeeded":{
+                console.log("heiiiiipi")
                 const paymentIntent=event.data.object;
                 const sessionList=await stripeInstance.checkout.sessions.list({
                     payment_intent:paymentIntent.id
                 })
                 const session=sessionList.data[0];
                 const {bookingId}=session.metadata;
+            
                 await Booking.findByIdAndUpdate(bookingId,{
                     isPaid:true,
                     paymentLink:""
@@ -43,3 +46,4 @@ export const stripeWebhooks=async (request,response)=>{
 
     }
 }
+
