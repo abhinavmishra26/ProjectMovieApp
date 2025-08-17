@@ -88,7 +88,7 @@ const sendBookingConfigurationEmai=inngest.createFunction(
             path:"show",
             populate:{path:"movie" ,model:"Movie"}
         }).populate("user");
-        
+
 await sendEmail({
     to:booking.user.email,
     subject:`Payment confirmation: "${booking.show.movie.title}" booked`,
@@ -125,4 +125,4 @@ await sendEmail({
 
 
 // Create an empty array where we'll export future Inngest functions
-export const functions = [syncUserCreation, syncUserDeletion,syncUserUpdation,releaseSeatsAndDeleteBooking];
+export const functions = [syncUserCreation, syncUserDeletion,syncUserUpdation,releaseSeatsAndDeleteBooking,sendBookingConfigurationEmai];
