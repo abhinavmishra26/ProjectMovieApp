@@ -8,13 +8,13 @@ const transporter=nodemailer.createTransport({
     }
 });
 
- const sendEmail = async (to, subject, html) => {
+ const sendEmail = async (to, subject, body) => {
     try {
       await transporter.sendMail({
         from: process.env.SENDER_EMAIL,
         to,
         subject,
-        html,
+        html:body
       });
       console.log("Email sent successfully");
     } catch (error) {
