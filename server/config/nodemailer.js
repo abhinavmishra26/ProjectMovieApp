@@ -8,19 +8,19 @@ const transporter=nodemailer.createTransport({
     }
 });
 
- const sendEmail = async (to, subject, body) => {
-    try {
-      await transporter.sendMail({
-        from: process.env.SENDER_EMAIL,
-        to,
-        subject,
-        html:body
-      });
-      console.log("Email sent successfully");
-    } catch (error) {
-      console.error("Error sending email:", error);
-      throw error;
-    }
-  };
+const sendEmail = async ({ to, subject, body }) => {
+  try {
+    await transporter.sendMail({
+      from: process.env.SENDER_EMAIL,
+      to,
+      subject,
+      html: body
+    });
+    console.log("Email sent successfully");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw error;
+  }
+};
 
 export default sendEmail;

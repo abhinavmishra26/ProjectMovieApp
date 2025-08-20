@@ -6,8 +6,6 @@ import dotenv from "dotenv"
 import { model } from "mongoose";
 import sendEmail from "../config/nodemailer.js";
 dotenv.config();
-// Create a client to send and receive events
-// export const inngest = new Inngest({ id: "movie-reservation-app" });
 export const inngest = new Inngest({
   id: "movie-reservation-app",
   eventKey: process.env.INNGEST_EVENT_KEY, // 👈 required
@@ -34,7 +32,6 @@ const  syncUserDeletion=inngest.createFunction(
     {event:'clerk/user.deleted'},
     async({event})=>{
         const {id}=event.data
-        // await User.findByIdAndDelete(id);
         await User.findOneAndDelete({ _id: id });
     }
 )
