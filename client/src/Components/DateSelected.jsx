@@ -28,19 +28,17 @@ const DateSelected = ({dateTime,id}) => {
             <ChevronLeftIcon className='mr-6'/>
         
                 <span >
-                    {Object.keys(dateTime).map((date)=>(
-                        <button onClick={()=>setSelected(date)} className={`w-16 h-16  rounded-md cursor-pointer my-2 mx-2 ${selected ===date? "bg-primary text-white":"border border-primary/70"} "`}>
+                    {Object.keys(dateTime).map((date,index)=>(
+                        <button onClick={()=>setSelected(date)} key={index} className={`w-16 h-16  rounded-md cursor-pointer my-2 mx-2 ${selected ===date? "bg-primary text-white":"border border-primary/70"} "`}>
                             <span className='block'>{new Date(date).getDate()}</span>
                             <span>{new Date(date).toLocaleDateString("en-US",{month:"short"})}</span>
                         </button>
                     ))}
                 </span>
             <ChevronRightIcon className='ml-6'/>
-
-            
         </div>
         
-            <button onClick={onBookHandler} className='w-34 h-10 bg-red-500 text-sm font-semibold rounded-sm'>Book Now</button>
+            <button onClick={onBookHandler} className='w-34 h-10 bg-red-500 text-sm cursor-pointer font-semibold rounded-sm hover:bg-red-400 '>Book Now</button>
         </div>
       </div>
        <BlurCircle top="1150px" right="50px"/>

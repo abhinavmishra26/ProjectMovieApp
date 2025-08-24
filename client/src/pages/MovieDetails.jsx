@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { dummyDateTimeData, dummyShowsData } from '../assets/assets';
-import { Heart, PlayCircleIcon, StarIcon } from 'lucide-react';
+import { Heart, Images, PlayCircleIcon, StarIcon } from 'lucide-react';
 import timeformate from '../lib/timeFormate';
 import BlurCircle from '../Components/BlurCircle';
 import DateSelected from '../Components/DateSelected';
@@ -26,7 +26,7 @@ const MovieDetails = () => {
           Authorization:`Bearer ${await getToken()}`
         }
       })
-      console.log(data.movie,"iam");
+      console.log(data,"heyyy");
       setShow({movie:data.movie, dateTime:data.dateTime,trailer:data.videoKey});
     }
     catch(error){
@@ -80,14 +80,15 @@ useEffect(() => {
             {timeformate(show.movie.runtime)} • {show.movie.genres.map((genre)=>genre.name).join(", ")}   • {new Date(show.movie.release_date).getFullYear()} 
           </p>
           <div className='flex gap-4'>
-            <a href='#trailer' className='w-40 h-11 cursor-pointer bg-gray-800 text-sm font-semibold rounded-md flex items-center px-4 gap-1 '>
+            <a href='#trailer' className='w-40 h-11 cursor-pointer bg-gray-800 text-sm font-semibold rounded-md flex items-center px-4 gap-1 hover:bg-gray-700 '>
               <PlayCircleIcon className='w-6'/>
               Watch Tailer</a>
-            <a href='#dateSelect' className=' block w-38 rounded-md text-sm font-semibold h-11 text-center py-2.5 bg-red-500'>Buy Tickets</a>
+            <a href='#dateSelect' className=' block w-38 rounded-md text-sm font-semibold h-11 text-center py-2.5 bg-red-500 hover:bg-red-400'>Buy Tickets</a>
             <div className='w-10 h-10 rounded-full bg-gray-800 px-2 py-2'>
             <Heart onClick={handleSubmit}  className={`cursor-pointer  ${favoriteMovies.find(movie=>movie._id===id)?"fill-primary text-primary":""}`}/>
             </div>
           </div>
+          <button className='w-[380px] h-10 bg-zinc-700 text-white rounded-md mt-4 hover:bg-zinc-500' onClick={()=>navigate(`/movies/${id}/images`)}>Preview</button>
         </div>
       </div>
       <div className='overflow-x-auto no-scrollbar px-6 md:px-0 '>

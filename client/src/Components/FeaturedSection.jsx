@@ -15,7 +15,7 @@ const FeaturedSection = () => {
         <div className='flex items-center justify-between pt-10 pb-10 mt-10 mb-10 px-4'>
           <BlurCircle top="0" right='49px'/>
             <p className='text-gray-300 font-medium text-lg'>Not Showing</p>
-            <button className='flex text-sm cursor-pointer '>View All <ArrowRight className='font-thin w-4'/></button>
+            <button className= "flex text-sm cursor-pointer hover:text-lg" onClick={()=>navigate("/movies")}>View All <ArrowRight className='font-thin w-4'/></button>
         </div>
         <div className='flex flex-wrap gap-8 max-sm:justify-center' >
           

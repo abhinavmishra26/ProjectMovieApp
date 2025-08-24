@@ -30,15 +30,11 @@ const HeroSection = () => {
   }, []);
 
 
-
   return (
       <div className='h-screen w-screen max-md:bg-center max-md:bg-cover bg-cover bg-center flex items-center '
       style={{ backgroundImage: `url(${backgroundImages[bgIndex]})` }}
       >
-
-     
       <div className='w-[420px] md:w-[1080px]  md:left-38 max-md:left-8 relative top-4'>
-      
       <img src={assets.marvelLogo}  className='mb-4'></img>
       <h1 className=' text-5xl md:text-7xl  font-semibold mb-4'><span className='text-4xl '>Forget the hassle of long ticket counters..</span></h1>
       <h1 className='text-6xl mb-6 font-semibold'>Tap to Book.</h1>

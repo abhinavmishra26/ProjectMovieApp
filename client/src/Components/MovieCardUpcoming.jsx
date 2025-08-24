@@ -8,11 +8,11 @@ const MovieCardUpcoming = ({movie}) => {
   const {image_base_url}=useAppContext();
     const navigate=useNavigate();
   return (
-    <div className='w-66 bg-gray-800 p-3 rounded-2xl'>
+    <div className='w-66 bg-gray-950 p-3 rounded-3xl border border-primary/50'>
       <img className='rounded-lg mb-2 h-50 object-cover cursor-pointer' src={image_base_url + movie.backdrop_path} onClick={()=>{navigate(`/movies/${movie._id}`);scrollTo(0,0)}}></img>
       <p className='mb-2 text-white font-semibold truncate' >{movie.title}</p>
       <div >
-      <p className='mb-4 text-sm text-blue-400 font-semibold truncate'>
+      <p className='mb-4 text-sm text-red-400 font-semibold truncate'>
       Release Date : <span className='font-bold text-cyan-400'>{movie.release_date}</span> 
       </p>
       <div className='flex justify-between mb-2' >

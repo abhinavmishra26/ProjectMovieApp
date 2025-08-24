@@ -1,6 +1,7 @@
 import axios from "axios"
 import Movie from "../model/Movie.js"
 import Show from "../model/Show.js"
+import { inngest } from "../inngest/index.js"
 
 export const getNowPlayingMovies=async(req,res)=>{
     try{
@@ -99,6 +100,14 @@ export const addShow=async(req,res)=>{
         if(showsToCreate.length>0){
             await Show.insertMany(showsToCreate);
         }
+
+        await inngest.send({
+      name: "app/show.added",
+      data: {
+        movieTitle: movie.title,
+      },
+    });
+
         res.json({success:true,message:'Show Added successfully'})
 
     }  catch(error){
@@ -135,6 +144,20 @@ export const getShow=async(req,res)=>{
             }
             dateTime[date].push({time:show.showDateTime ,showId:show._id})
         })
+        let images=null;
+    try{
+        const {data}=await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/images`, {
+        headers: {
+          Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
+        },
+      });
+     images =data || null;
+    }
+    catch(error){
+         console.error(error);
+        res.json({success:false,message:error.message});
+    }
+ 
     let videoKey = null;
     try {
       const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos`, {
@@ -146,8 +169,7 @@ export const getShow=async(req,res)=>{
     } catch (err) {
       console.warn("TMDB trailer fetch failed:", err.message);
     }
-
-        res.json({success:true,movie,dateTime,videoKey:videoKey})
+        res.json({success:true,movie,dateTime,videoKey:videoKey ,Images:images})
     }
     catch(error){
         console.error(error);
